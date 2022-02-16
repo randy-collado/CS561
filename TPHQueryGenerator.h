@@ -14,7 +14,7 @@
 
 class TPHQueryGenerator {
     private:
-        std::string commandSplits[2];
+        std::string commandSplits[4];
 	//this vector holds the filepaths of the TPC-H benchmark queries
         std::vector<std::string> queryfileNames;
 	//this vector holds the filepaths of any custom queries we may want to run
@@ -22,12 +22,14 @@ class TPHQueryGenerator {
 	std::map<std::string, double> statistics;
 
     public:
-        TPHQueryGenerator(std::vector<int> queryIDs);
+        TPHQueryGenerator(std::vector<std::string> queryFilepaths);
         ~TPHQueryGenerator();
 
         bool runQueries(unsigned int runs);
+	bool runCustomQueries(unsigned int runs);
         bool outputStatistics(bool toLogFile);
-        std::vector<std::string> generateQueryStrings(std::vector<int> queryIDs);
+	bool addCustomQueries(std::vector<std::string> queries);
+	
 
 
 };

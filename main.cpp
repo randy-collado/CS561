@@ -6,8 +6,11 @@
 
 int main(int argc, char** argv){
 
-    TPHQueryGenerator gen(std::vector<int>{5, 8, 20});
+    TPHQueryGenerator gen(std::vector<std::string>{"../queries/5.sql", "../queries/8.sql", "../queries/20.sql"});
     gen.runQueries(10);
+    gen.addCustomQueries(std::vector<std::string>{"../custom/sum_lineitem.sql", "../custom/sum_max_lineitem.sql", "../custom/sum_max_max_lineitem.sql"});
+    std::cout << "***Assigned Queries***" << std::endl;
+    gen.runCustomQueries(10);
     gen.outputStatistics(true);
     return 0;
 }

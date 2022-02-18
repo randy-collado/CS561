@@ -122,21 +122,21 @@ bool TPHQueryGenerator::runQueries(unsigned int runs){
 			    raw_monet_times["Q5"].push_back(monet_duration.count());
 			    
 			    statistics["Q5_PSQL_TOTAL"] += psql_duration.count();
-			    raw_monet_times["Q5"].push_back(psql_duration.count());
+			    raw_psql_times["Q5"].push_back(psql_duration.count());
 			    break;
 		    case 1:
 			    statistics["Q8_MONET_TOTAL"] += monet_duration.count();
 			    raw_monet_times["Q8"].push_back(monet_duration.count());
 			    
 			    statistics["Q8_PSQL_TOTAL"] += psql_duration.count();
-			    raw_monet_times["Q8"].push_back(psql_duration.count());
+			    raw_psql_times["Q8"].push_back(psql_duration.count());
 			    break;
 		    case 2:
 			    statistics["Q20_MONET_TOTAL"] += monet_duration.count();
 			    raw_monet_times["Q20"].push_back(monet_duration.count());
 			    
 			    statistics["Q20_PSQL_TOTAL"] += psql_duration.count();
-			    raw_monet_times["Q20"].push_back(psql_duration.count());
+			    raw_psql_times["Q20"].push_back(psql_duration.count());
 			    break;
 		    default:
 			    break;
@@ -204,14 +204,14 @@ bool TPHQueryGenerator::outputStatistics(bool toLogFile){
 	std::cout << "Standard deviation for query 20 execution time on MonetDB: " << q20_monet_std_dev << " ms" << std::endl;
 	std::cout << "Average execution time for query 20 on PostgreSQL: " << q20_psql_avg << " ms" << std::endl;
 	std::cout << "Standard deviation for query 20 execution time on PostgreSQL: " << q20_psql_std_dev << " ms" << std::endl;
-
+	std::cout << std::endl;
 	for (auto&& customQuery : customfileNames){
 
 		std::cout << "Average execution time for " << customQuery << " on MonetDB: " << statistics[customQuery+"_MONET_TOTAL"] / statistics["NUM_CUSTOM_RUNS"] << " ms"  << std::endl;
 		std::cout << "Standard deviation for " << customQuery << " execution time on MonetDB: " << calcStandardDeviation(raw_monet_times[customQuery]) << "\n\n";
-		
 		std::cout << "Average execution time for " << customQuery << " on PostgreSQL: " << statistics[customQuery+"_PSQL_TOTAL"] / statistics["NUM_CUSTOM_RUNS"] << " ms"  << std::endl;
 		std::cout << "Standard deviation for " << customQuery << " execution time on PostgreSQL: " << calcStandardDeviation(raw_psql_times[customQuery]) << "\n";
+		std::cout << std::endl;
 	}
 
 	return true;

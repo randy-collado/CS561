@@ -20,6 +20,10 @@ class TPHQueryGenerator {
 	//this vector holds the filepaths of any custom queries we may want to run
 	std::vector<std::string> customfileNames;
 	std::map<std::string, double> statistics;
+	std::map<std::string, std::vector<double>> raw_monet_times;
+	std::map<std::string, std::vector<double>> raw_psql_times;
+
+	double calcStandardDeviation(const std::vector<double>& data_points);
 
     public:
         TPHQueryGenerator(std::vector<std::string> queryFilepaths);
@@ -28,8 +32,8 @@ class TPHQueryGenerator {
         bool runQueries(unsigned int runs);
 	bool runCustomQueries(unsigned int runs);
         bool outputStatistics(bool toLogFile);
-	bool addCustomQueries(std::vector<std::string> queries);
-	
+	bool addCustomQueries(const std::vector<std::string>& queries);
+		
 
 
 };
